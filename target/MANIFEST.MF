@@ -1,9 +1,0 @@
-Manifest-Version: 1.0
-Implementation-Title: spring-boot-docker
-Implementation-Version: 0.0.1-SNAPSHOT
-Implementation-Vendor-Id: org.aliece
-Build-Jdk: 1.8.0_40
-Built-By: zhangsaizhong
-Created-By: IntelliJ IDEA
-Main-Class: org.aliece.docker.Application
-
