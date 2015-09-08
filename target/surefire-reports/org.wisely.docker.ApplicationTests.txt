@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: org.wisely.docker.ApplicationTests
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 4.836 sec - in org.wisely.docker.ApplicationTests
