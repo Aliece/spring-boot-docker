@@ -15,14 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/v/o")
 public class OrderController {
 
-    @Autowired
-    private StringRedisTemplate stringRedisTemplate;
-
     @RequestMapping(value = "order", method = RequestMethod.GET)
     public String order(){
-        stringRedisTemplate.opsForValue().set("message", "Hello, World");
-        final String message = stringRedisTemplate.opsForValue().get("message");
-        return message;
-
+        return "success";
     }
 }

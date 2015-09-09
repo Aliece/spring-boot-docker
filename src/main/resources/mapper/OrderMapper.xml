@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.aliece.docker.repository.mapper.OrderMapper">
+
+    <resultMap id="BaseResultMap" type="org.aliece.docker.domain.Order" >
+        <id column="OrderID" property="ProductID" jdbcType="BIGINT" />
+        <result column="AccountID" property="AccountID" jdbcType="BIGINT" />
+        <result column="ProductID" property="ProductID" jdbcType="BIGINT" />
+        <result column="LastModifyTime" property="LastModifyTime" jdbcType="DATETIME" />
+        <result column="CreateTime" property="CreateTime" jdbcType="DATETIME" />
+    </resultMap>
+
+    <select id="selectByProductID" resultType="Order">
+        select * from order where ProductID = #{productId}
+    </select>
+
+    <select id="selectByUserID" resultType="Order">
+        select * from order where AccountID = #{accountId}
+    </select>
+
+    <insert id="insert" parameterType="Order">
+        INSERT INTO order(OrderID, AccountID, ProductID, LastModifyTime, CreateTime)
+        VALUE(#{orderId}, #{accountId}, #{productId}, #{lastModifyTime}, #{createTime})
+    </insert>
+
+</mapper>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.aliece.docker.repository.mapper.ProductStoreMapper">
+
+    <resultMap id="BaseResultMap" type="org.aliece.docker.domain.ProductStore" >
+        <id column="ProductStoreID" property="ProductStoreID" jdbcType="BIGINT" />
+        <result column="ProductID" property="ProductID" jdbcType="BIGINT" />
+        <result column="Store" property="Store" jdbcType="BIGINT" />
+    </resultMap>
+
+    <select id="selectByProductID" resultType="ProductStore">
+        select * from productstore where ProductID = #{productId}
+    </select>
+
+    <insert id="insert" parameterType="ProductStore">
+        INSERT INTO productstore(ProductStoreID, ProductID, Store)
+        VALUE(#{productStoreId}, #{productId}, #{store})
+    </insert>
+
+    <update id="update" parameterType="ProductStore">
+        UPDATE productstore SET Store = #{store} WHERE  ProductID = #{productId}
+    </update>
+
+</mapper>
