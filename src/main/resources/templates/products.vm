@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+</head>
+<body>
+<table>
+    <div class="panel panel-default">
+        <div class="panel-heading">Product List</div>
+        <!-- Table -->
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ProductID</th>
+                    <th>ProductName</th>
+                    <th>ProductDesc</th>
+                </tr>
+            </thead>
+            <tbody>
+                #foreach ( $product in $products )
+                <tr><td>$product.ProductID</td><td>$product.ProductName</td><td>$product.ProductDesc</td><td><input class="btn btn-default" type="submit" value="Buy"></td></tr>
+                #end
+            </tbody>
+        </table>
+    </div>
+</table>
+</body>
+</html>

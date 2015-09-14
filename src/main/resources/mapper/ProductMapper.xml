@@ -16,7 +16,11 @@
 
     <insert id="insert" parameterType="Product">
         INSERT INTO product(ProductID, ProductName, ProductDesc)
-        VALUE(#{productId}, #{productName}, #{productDesc})
+        VALUE(#{ProductID}, #{ProductName}, #{ProductDesc})
     </insert>
+
+    <select id="findAll" resultMap="BaseResultMap" parameterType="org.springframework.data.domain.PageRequest">
+        select * from product limit ${page},${size}
+    </select>
 
 </mapper>

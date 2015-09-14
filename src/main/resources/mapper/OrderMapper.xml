@@ -8,21 +8,21 @@
         <id column="OrderID" property="ProductID" jdbcType="BIGINT" />
         <result column="AccountID" property="AccountID" jdbcType="BIGINT" />
         <result column="ProductID" property="ProductID" jdbcType="BIGINT" />
-        <result column="LastModifyTime" property="LastModifyTime" jdbcType="DATETIME" />
-        <result column="CreateTime" property="CreateTime" jdbcType="DATETIME" />
+        <result column="LastModifyTime" property="LastModifyTime" jdbcType="TIMESTAMP" />
+        <result column="CreateTime" property="CreateTime" jdbcType="TIMESTAMP" />
     </resultMap>
 
     <select id="selectByProductID" resultType="Order">
-        select * from order where ProductID = #{productId}
+        select * from orders where ProductID = #{productId}
     </select>
 
     <select id="selectByUserID" resultType="Order">
-        select * from order where AccountID = #{accountId}
+        select * from orders where AccountID = #{accountId}
     </select>
 
     <insert id="insert" parameterType="Order">
-        INSERT INTO order(OrderID, AccountID, ProductID, LastModifyTime, CreateTime)
-        VALUE(#{orderId}, #{accountId}, #{productId}, #{lastModifyTime}, #{createTime})
+        INSERT INTO orders (AccountID, ProductID, LastModifyTime, CreateTime)
+        VALUE (#{AccountID,jdbcType=BIGINT}, #{ProductID,jdbcType=BIGINT}, #{LastModifyTime,jdbcType=TIMESTAMP}, #{CreateTime,jdbcType=TIMESTAMP})
     </insert>
 
 </mapper>

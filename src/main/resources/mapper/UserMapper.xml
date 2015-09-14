@@ -5,9 +5,9 @@
 <mapper namespace="org.aliece.docker.repository.mapper.UserMapper">
 
     <resultMap id="BaseResultMap" type="org.aliece.docker.domain.User" >
-        <id column="UserID" property="userId" jdbcType="BIGINT" />
-        <result column="UserName" property="userName" jdbcType="VARCHAR" />
-        <result column="Email" property="email" jdbcType="VARCHAR" />
+        <id column="UserID" property="UserID" jdbcType="BIGINT" />
+        <result column="UserName" property="UserName" jdbcType="VARCHAR" />
+        <result column="Email" property="Email" jdbcType="VARCHAR" />
     </resultMap>
 
     <select id="selectUser" resultType="User">

@@ -16,11 +16,11 @@
 
     <insert id="insert" parameterType="ProductStore">
         INSERT INTO productstore(ProductStoreID, ProductID, Store)
-        VALUE(#{productStoreId}, #{productId}, #{store})
+        VALUE(#{ProductStoreID}, #{ProductID}, #{Store})
     </insert>
 
     <update id="update" parameterType="ProductStore">
-        UPDATE productstore SET Store = #{store} WHERE  ProductID = #{productId}
+        UPDATE productstore SET Store = #{Store} WHERE  ProductID = #{ProductID}
     </update>
 
 </mapper>

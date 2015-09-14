@@ -5,6 +5,8 @@ import org.aliece.docker.persistence.MybatisMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.List;
+
 /**
  * Created by zhangsaizhong on 15/9/7.
  */
@@ -16,5 +18,5 @@ public interface UserMapper {
 
     void insert(User user);
 
-    Page<User> findAll(Pageable var1);
+    List<User> findAll(Pageable var1);
 }

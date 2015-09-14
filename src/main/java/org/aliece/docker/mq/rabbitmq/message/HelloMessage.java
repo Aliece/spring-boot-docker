@@ -1,4 +1,4 @@
-package org.aliece.docker.mq.rabbitmq;
+package org.aliece.docker.mq.rabbitmq.message;
 
 import lombok.Data;
 
