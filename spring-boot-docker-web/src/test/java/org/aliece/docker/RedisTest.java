@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 
@@ -29,13 +30,28 @@ public class RedisTest {
     private StringRedisTemplate stringRedisTemplate;
 
     @Test
-    public void testIncr() throws Exception{
+    public void testGet() throws Exception{
+        ValueOperations<String, String> valueOperations = stringRedisTemplate.opsForValue();
+        System.out.println(valueOperations.increment("test1", 0L));
+    }
 
-        for (int i = 0; i <10;i++) {
+    @Test
+    public void testIncr() throws Exception{
+        for (int i = 0; i <200;i++) {
             new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    stringRedisTemplate.opsForValue().increment("test1",100);
+                    ValueOperations<String, String> valueOperations = stringRedisTemplate.opsForValue();
+                    if(!stringRedisTemplate.hasKey("test1")) {
+                        valueOperations.increment("test1", 1L);
+                    } {
+                        valueOperations.increment("test1", 1L);
+                    }
+//                    if (valueOperations.increment("test1", -1L) < 0) {
+//                        System.out.println(11111111);
+//                    } else {
+//
+//                    }
                 }
             }).start();
         }

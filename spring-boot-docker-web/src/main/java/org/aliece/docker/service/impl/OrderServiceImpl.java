@@ -1,4 +1,4 @@
-package org.aliece.docker.service;
+package org.aliece.docker.service.impl;
 
 import org.aliece.docker.Utils.CodecFactory;
 import org.aliece.docker.Utils.EventTemplate;
@@ -9,7 +9,7 @@ import org.aliece.docker.mq.rabbitmq.DefaultEventController;
 import org.aliece.docker.mq.rabbitmq.message.EventMessage;
 import org.aliece.docker.repository.mapper.OrderMapper;
 import org.aliece.docker.repository.mapper.ProductStoreMapper;
-import org.apache.commons.lang3.StringUtils;
+import org.aliece.docker.service.OrderService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
@@ -26,10 +26,10 @@ import java.util.Date;
 /**
  * Created by zhangsaizhong on 15/9/9.
  */
-@Service
-public class OrderService {
+@Service("OrderService")
+public class OrderServiceImpl implements OrderService {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(OrderService.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(OrderServiceImpl.class);
 
     @Autowired
     RabbitTemplate rabbitTemplate;
@@ -57,22 +57,13 @@ public class OrderService {
     public boolean createOrder(String productId, String userId) {
         EventTemplate eventTemplate = eventController.getEopEventTemplate();
         try {
-            Long store=null;
             ValueOperations<String, String> valueOperations = stringRedisTemplate.opsForValue();
+            ProductStore productStore = productStoreMapper.selectByProductID(productId);
+            Long store = productStore.getStore();
 
-            String value = valueOperations.get(productId);
-            if (StringUtils.isEmpty(value)) {
-                ProductStore productStore = productStoreMapper.selectByProductID(productId);
-                store = productStore.getStore();
-                valueOperations.set(productId+"-store",String.valueOf(store));
-            } else {
-                store = Long.valueOf(valueOperations.get(productId+"-store"));
-            }
-
-            if (StringUtils.isNotEmpty(value) && Long.valueOf(value) > store) {
+            if (valueOperations.increment(productId, 0) < 0) {
                 return false;
             } else {
-                valueOperations.increment(productId, 1);
                 Order order = new Order();
                 order.setAccountID(Long.valueOf(userId));
                 order.setProductID(Long.valueOf(productId));
